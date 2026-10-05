@@ -69,7 +69,11 @@ echo -e "${GREEN}INSTALADO (ID: $RUSTDESK_ID)${NC}"
 # Garantir serviço do RustDesk habilitado
 if ! systemctl is-active --quiet rustdesk; then
     echo "       Iniciando serviço systemd do RustDesk..."
-    sudo systemctl enable --now rustdesk 2>/dev/null || true
+    if sudo -n true 2>/dev/null; then
+        sudo systemctl enable --now rustdesk 2>/dev/null || true
+    else
+        echo "       (Dica: execute 'sudo systemctl enable --now rustdesk' para garantir inicialização no boot)"
+    fi
 fi
 
 # 5. Configurar Senha Fixa de Acesso Não Assistido
