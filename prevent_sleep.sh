@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
 # ==============================================================================
-# Inibidor de Suspensão e Keepalive de Rede para o PC da FEM
+# Inibidor de Suspensão e Keepalive de Rede para o Omarchy-2-Trabalho
 # ==============================================================================
 
 echo "====================================================="
-echo "   Inibidor de Sleep & Keepalive Ativo (FEM)"
+echo "   Inibidor de Sleep & Keepalive Ativo (Trabalho)    "
 echo "====================================================="
 echo "Este script impede que o sistema entre em suspensão"
 echo "e envia pings periódicos para manter o NAT ativo no"
-echo "firewall da universidade."
+echo "firewall da rede."
 echo "Pressione Ctrl+C para encerrar quando retornar."
 echo "====================================================="
 
@@ -29,7 +29,7 @@ trap "kill $KEEPALIVE_PID 2>/dev/null; exit 0" SIGINT SIGTERM EXIT
 
 # Executa o inibidor oficial do systemd
 if command -v systemd-inhibit &>/dev/null; then
-    systemd-inhibit --what=idle:sleep:shutdown --who="Testbirds AntiFraud" --why="Executando teste remoto a partir de casa" sleep infinity
+    systemd-inhibit --what=idle:sleep:shutdown --who="Testbirds AntiFraud" --why="Executando teste remoto a partir do Omarchy-Casa" sleep infinity
 else
     echo "systemd-inhibit não encontrado. Mantendo processo ativo..."
     while true; do sleep 3600; done

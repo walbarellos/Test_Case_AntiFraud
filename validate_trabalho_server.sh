@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ==============================================================================
-# Script de Validação e Preparação do Servidor na FEM
+# Script de Validação e Preparação do Servidor (Omarchy-2-Trabalho)
 # Repositório: https://github.com/walbarellos/Test_Case_AntiFraud
 # ==============================================================================
 
@@ -13,9 +13,9 @@ YELLOW='\033[1;33m'
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
-echo -e "${BLUE}======================================================${NC}"
-echo -e "${BLUE}   TESTBIRDS ANTI-FRAUD: VALIDAÇÃO DO SERVIDOR (FEM)  ${NC}"
-echo -e "${BLUE}======================================================${NC}"
+echo -e "${BLUE}===================================================================${NC}"
+echo -e "${BLUE}   TESTBIRDS ANTI-FRAUD: VALIDAÇÃO (Omarchy-2-Trabalho)            ${NC}"
+echo -e "${BLUE}===================================================================${NC}"
 echo ""
 
 # 1. Checagem de Conexão à Internet
@@ -81,7 +81,7 @@ echo ""
 echo -e "${YELLOW}Deseja definir/atualizar a senha de acesso não assistido do RustDesk agora? (s/N)${NC}"
 read -r -t 10 resp || resp="n"
 if [[ "$resp" =~ ^[sSyY]$ ]]; then
-    read -sp "Digite a senha fixa que deseja usar para conectar de casa: " PASSWD
+    read -sp "Digite a senha fixa que deseja usar para conectar do Omarchy-Casa: " PASSWD
     echo ""
     if [[ -n "$PASSWD" ]]; then
         sudo rustdesk --password "$PASSWD"
@@ -100,25 +100,25 @@ fi
 
 # 7. Resumo Final
 echo ""
-echo -e "${BLUE}======================================================${NC}"
-echo -e "${GREEN}           TUDO PRONTO! MÁQUINA VALIDADA             ${NC}"
-echo -e "${BLUE}======================================================${NC}"
+echo -e "${BLUE}===================================================================${NC}"
+echo -e "${GREEN}           TUDO PRONTO! MÁQUINA VALIDADA                          ${NC}"
+echo -e "${BLUE}===================================================================${NC}"
 echo ""
-echo -e "Anote ou tire foto destes dados antes de sair da FEM:"
+echo -e "Anote ou tire foto destes dados antes de sair do trabalho:"
+echo -e "  • ${YELLOW}Dispositivo:${NC}                     Omarchy-2-Trabalho"
 echo -e "  • ${YELLOW}IP Tailscale (Fixo e Imutável):${NC}  $TAILSCALE_IP"
-echo -e "  • ${YELLOW}Hostname Tailscale:${NC}             walbarellos-fem"
 echo -e "  • ${YELLOW}RustDesk ID:${NC}                    $RUSTDESK_ID"
 echo ""
-echo -e "${BLUE}Como conectar quando chegar em CASA:${NC}"
-echo -e "  1. No PC de casa, certifique-se de que o Tailscale está logado na sua conta."
-echo -e "  2. Teste o terminal:  ${YELLOW}ssh walbarellos@$TAILSCALE_IP${NC} (ou ${YELLOW}ssh walbarellos@walbarellos-fem${NC})"
+echo -e "${BLUE}Como conectar a partir do Omarchy-Casa:${NC}"
+echo -e "  1. No Omarchy-Casa, certifique-se de que o Tailscale está logado na sua conta."
+echo -e "  2. Teste o terminal:  ${YELLOW}ssh walbarellos@$TAILSCALE_IP${NC}"
 echo -e "  3. No RustDesk de casa, conecte digitando o ID: ${YELLOW}$RUSTDESK_ID${NC}"
 echo -e "     (Ou direto pelo IP Tailscale: ${YELLOW}$TAILSCALE_IP${NC})"
 echo ""
-echo -e "${RED}LEMBRETE ANTES DE SAIR DA FEM:${NC}"
+echo -e "${RED}LEMBRETE ANTES DE SAIR:${NC}"
 echo -e "  - Deixe o PC ligado na tomada."
 echo -e "  - Deixe o Chromium aberto com a página do teste."
 echo -e "  - Não desligue nem suspenda o computador."
 echo -e "  - Para garantir 100% que o PC não dormirá, você pode rodar em segundo plano:"
 echo -e "    ${YELLOW}./prevent_sleep.sh &${NC}"
-echo -e "${BLUE}======================================================${NC}"
+echo -e "${BLUE}===================================================================${NC}"
