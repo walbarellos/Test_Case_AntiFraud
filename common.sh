@@ -23,6 +23,7 @@ TRABALHO_HOSTNAME="walbarellos-fem"
 TRABALHO_IP="100.81.170.85"
 TRABALHO_RUSTDESK_ID="115406459"
 
+DEFAULT_USER="walbarellos"
 DEFAULT_PASS="betel"
 
 # Mensagens formatadas

@@ -67,7 +67,22 @@ case "$OPTION" in
     2)
         ensure_moonlight
         log_success "Iniciando Moonlight..."
-        moonlight stream "$TRABALHO_IP" "Desktop" 2>/dev/null || moonlight &
+        echo -e "  • Conectando no IP do Trabalho: ${YELLOW}$TRABALHO_IP${NC}"
+        if moonlight list "$TRABALHO_IP" 2>&1 | grep -q "Desktop"; then
+            moonlight stream "$TRABALHO_IP" "Desktop" &
+        else
+            moonlight &
+            echo ""
+            echo -e "${YELLOW}Se o Moonlight solicitar um PIN de pareamento (apenas no 1º acesso):${NC}"
+            read -t 30 -p "Digite o PIN de 4 dígitos aqui (ou Enter para pular): " PAIR_PIN || true
+            if [[ -n "$PAIR_PIN" ]]; then
+                curl -k -s -u "$DEFAULT_USER:$DEFAULT_PASS" -X POST "https://$TRABALHO_IP:47990/api/pin" \
+                    -H "Content-Type: application/json" -d "{\"pin\":\"$PAIR_PIN\"}" >/dev/null 2>&1 || true
+                log_success "PIN enviado para o Sunshine do Trabalho! Pareamento concluído."
+                sleep 2
+                moonlight stream "$TRABALHO_IP" "Desktop" &
+            fi
+        fi
         ;;
     3)
         log_info "Conectando ao terminal do Omarchy-Trabalho..."
