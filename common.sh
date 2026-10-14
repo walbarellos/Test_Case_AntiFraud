@@ -113,10 +113,22 @@ ensure_rustdesk() {
             sleep 2
         fi
 
+        # Habilitar Servidor de IP Direto (porta 21118) sem depender de servidores públicos
+        run_sudo sed -i '/\[options\]/a direct-server = '\''Y'\''' /root/.config/rustdesk/RustDesk.toml 2>/dev/null || true
+        run_sudo sed -i '/\[options\]/a direct-server = '\''Y'\''' /root/.config/rustdesk/RustDesk2.toml 2>/dev/null || true
+        sed -i '/\[options\]/a direct-server = '\''Y'\''' ~/.config/rustdesk/RustDesk.toml 2>/dev/null || true
+        sed -i '/\[options\]/a direct-server = '\''Y'\''' ~/.config/rustdesk/RustDesk2.toml 2>/dev/null || true
+
+        # Liberar porta 21118 e interface tailscale0 no UFW se ativo
+        if command -v ufw &>/dev/null; then
+            run_sudo ufw allow in on tailscale0 2>/dev/null || true
+            run_sudo ufw allow 21118/tcp 2>/dev/null || true
+        fi
+
         # Configurar senha padrão fixa para acesso não assistido
         run_sudo rustdesk --password "$DEFAULT_PASS" 2>/dev/null || true
         local rust_id=$(rustdesk --get-id 2>/dev/null || echo "Desconhecido")
-        log_success "RustDesk ativo! ID local: $rust_id (Senha: $DEFAULT_PASS)"
+        log_success "RustDesk ativo! ID local: $rust_id | IP Direto ativo na porta 21118 (Senha: $DEFAULT_PASS)"
     else
         log_error "Não foi possível verificar/instalar o RustDesk."
     fi

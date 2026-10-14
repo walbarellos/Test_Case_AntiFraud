@@ -60,9 +60,9 @@ case "$OPTION" in
                 run_sudo pacman -S --needed --noconfirm rustdesk || true
             fi
         fi
-        log_success "Abrindo RustDesk..."
-        echo -e "No RustDesk, conectando no ID: ${YELLOW}$TRABALHO_RUSTDESK_ID${NC} (IP: ${YELLOW}$TRABALHO_IP${NC})"
-        rustdesk --connect "$TRABALHO_RUSTDESK_ID" &>/dev/null &
+        log_success "Abrindo RustDesk via IP Direto Tailscale..."
+        echo -e "Conectando no IP: ${YELLOW}$TRABALHO_IP${NC} (ID Alternativo: ${YELLOW}$TRABALHO_RUSTDESK_ID${NC})"
+        rustdesk --connect "$TRABALHO_IP" &>/dev/null &
         ;;
     2)
         ensure_moonlight

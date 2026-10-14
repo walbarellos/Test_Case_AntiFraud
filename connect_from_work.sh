@@ -63,11 +63,12 @@ case "$OPTION" in
                 run_sudo pacman -S --needed --noconfirm rustdesk || true
             fi
         fi
-        log_success "Iniciando RustDesk e conectando no Omarchy-Casa..."
-        echo -e "  • ${YELLOW}ID de Casa:${NC}   $CASA_RUSTDESK_ID (ou IP: $CASA_IP)"
-        echo -e "  • ${YELLOW}Senha:${NC}        $DEFAULT_PASS"
+        log_success "Iniciando RustDesk e conectando no Omarchy-Casa via IP Direto Tailscale..."
+        echo -e "  • ${YELLOW}IP Direto Tailscale:${NC}  $CASA_IP"
+        echo -e "  • ${YELLOW}ID Alternativo:${NC}       $CASA_RUSTDESK_ID"
+        echo -e "  • ${YELLOW}Senha:${NC}                $DEFAULT_PASS"
         echo ""
-        rustdesk --connect "$CASA_RUSTDESK_ID" &>/dev/null &
+        rustdesk --connect "$CASA_IP" &>/dev/null &
         ;;
     2)
         ensure_moonlight
