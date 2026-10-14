@@ -26,6 +26,10 @@ TRABALHO_RUSTDESK_ID="115406459"
 DEFAULT_USER="walbarellos"
 DEFAULT_PASS="betel"
 
+# Garante variáveis de display Wayland caso executado via SSH ou subshell
+export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}"
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+
 # Mensagens formatadas
 log_info()    { echo -e "${BLUE}[INFO]${NC} $*"; }
 log_success() { echo -e "${GREEN}[✔]${NC} $*"; }
