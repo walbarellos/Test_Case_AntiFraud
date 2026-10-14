@@ -29,7 +29,7 @@ trap "kill $KEEPALIVE_PID 2>/dev/null; exit 0" SIGINT SIGTERM EXIT
 
 # Executa o inibidor oficial do systemd
 if command -v systemd-inhibit &>/dev/null; then
-    systemd-inhibit --what=idle:sleep:shutdown --who="Omarchy Remote" --why="Acesso Remoto Ativo" sleep infinity
+    systemd-inhibit --what=idle:sleep --who="Omarchy Remote" --why="Acesso Remoto Ativo" sleep infinity
 else
     echo "systemd-inhibit não encontrado. Mantendo processo ativo..."
     while true; do sleep 3600; done
